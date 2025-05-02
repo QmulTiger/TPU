@@ -1,41 +1,23 @@
- // X-axis pins (CNC Shield)
-  #define X_STEP 2
-  #define X_DIR 5
+#define X_LIMIT 9   // Shared X-MIN and X-MAX
+#define Y_LIMIT 10  // Shared Y-MIN and Y-MAX
 
-  // Y-axis pins (CNC Shield)
-  #define Y_STEP 3
-  #define Y_DIR 6
+void setup() {
+  pinMode(X_LIMIT, INPUT_PULLUP);
+  pinMode(Y_LIMIT, INPUT_PULLUP);
 
-  // Movement parameters
-  const int stepsPerMove = 200;        // Adjust (200 = 1 full rotation)
-  const int stepDelay = 1000;          // Microseconds between steps
+  Serial.begin(9600);
+  Serial.println("Limit Switch Test (Shared X/Y Pins)");
+  Serial.println("Press any X or Y limit switch to see output.");
+}
 
-  void setup() {
-    pinMode(X_STEP, OUTPUT);
-    pinMode(X_DIR, OUTPUT);
-    pinMode(Y_STEP, OUTPUT);
-    pinMode(Y_DIR, OUTPUT);
+void loop() {
+  if (digitalRead(X_LIMIT) == LOW) {
+    Serial.println("X limit switch triggered");
+    delay(500);  // debounce delay
   }
 
-  void moveMotor(int stepPin, int dirPin, bool direction, int steps) {
-    digitalWrite(dirPin, direction ? HIGH : LOW);
-    for (int i = 0; i < steps; i++) {
-      digitalWrite(stepPin, HIGH);
-      delayMicroseconds(stepDelay);
-      digitalWrite(stepPin, LOW);
-      delayMicroseconds(stepDelay);
-    }
-    delay(1000); // pause after movement
+  if (digitalRead(Y_LIMIT) == LOW) {
+    Serial.println("Y limit switch triggered");
+    delay(500);  // debounce delay
   }
-
-  void loop() {
-    // X-axis forward
-    moveMotor(X_STEP, X_DIR, true, stepsPerMove);
-    // X-axis backward
-    moveMotor(X_STEP, X_DIR, false, stepsPerMove);
-
-    // Y-axis forward
-    moveMotor(Y_STEP, Y_DIR, true, stepsPerMove);
-    // Y-axis backward
-    moveMotor(Y_STEP, Y_DIR, false, stepsPerMove);
-  }
+}
