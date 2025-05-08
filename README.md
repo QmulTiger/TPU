@@ -1,19 +1,22 @@
 # TPU
-QMUL
+CNC BED:
 
-ActuatorSimpleSpin:
-Spins the BLDC Motor
-
-
-	
-CNCbedCombinedtesting:
-Combines switches and stepper motors
-	
 CNCbedLimitstesting
 Just testes the end switches
 
-CNCbedsteppertesting
+CNCbedsteppertesting 
 Moves the stepper motors back and forth 
 
+CNCbedCombinedtesting:
+Combines switches and stepper motors
+
+Actuator: 
+actuatorEncoder
+Reads the magnetic encoder value live
+
+ActuatorSimpleSpin
+Spins the BLDC Motor (open loop)
+
+Power:
 PowerRelayMainCode
 Code to utilize LCD screen from 3d printer. 
