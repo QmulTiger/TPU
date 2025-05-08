@@ -18,5 +18,8 @@ ActuatorSimpleSpin
 Spins the BLDC Motor (open loop)
 
 Power:
+ReadSerial
+Reads serial input from screen.
+
 PowerRelayMainCode
 Code to utilize LCD screen from 3d printer. 
